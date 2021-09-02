@@ -1,5 +1,7 @@
 <template>
   <v-app>
+    <DrawerComponent/>
+    <HeaderComponent/>
     <v-main>
       <router-view/>
     </v-main>
@@ -8,9 +10,12 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator"
+import HeaderComponent from "@/components/HeaderComponent.vue"
+import DrawerComponent from "@/components/DrawerComponent.vue"
+
 
 @Component({
-  components: { }
+  components: { HeaderComponent, DrawerComponent }
 })
 
 export default class App extends Vue {
@@ -18,3 +23,9 @@ export default class App extends Vue {
 }
 
 </script>
+
+<style>
+.transparent {
+  background: transparent;
+}
+</style>
