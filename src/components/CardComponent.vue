@@ -28,7 +28,7 @@
         </v-btn>
       </template>
 
-      <v-card>
+      <v-card class="px-4">
         <v-card-title class="text-h5">
           Producto agregado
           <v-spacer/>
