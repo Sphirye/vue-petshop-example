@@ -42,7 +42,7 @@ export default class HeaderComponent extends Vue {
   created() {
     PurchaseService.getPurchase(this, this.purchase)
   }
-  
+
 }
 
 </script>
