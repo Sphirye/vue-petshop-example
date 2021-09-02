@@ -9,14 +9,14 @@
   </v-row>
 
   <v-row v-else justify="center">
-    <v-col cols="6">
-      <span class="my-5 mx-5">¡Nada que ver aquí!</span>
+    <v-col cols="6" class="text-center">
+      <span class="my-5">¡Nada que ver aquí!</span>
     </v-col>
   </v-row>
 
   <v-row v-if="products.length == 0" justify="center">
-    <v-col cols="6">
-      <span class="my-5 mx-5">No hay articulos disponibles.</span>
+    <v-col cols="6" class="text-center">
+      <span class="my-5 mx-5 font-weight-bold grey--text text--darken-2">No hay articulos disponibles.</span>
     </v-col>
   </v-row>
 </v-container>
@@ -42,7 +42,7 @@ export default class CategoryView extends Vue {
   products: Product[] = []
   routeExists: boolean = false
   items = [
-    { text: 'Inicio', disabled: false, href: '' },
+    { text: 'Inicio', disabled: false, href: '/' },
     { text: 'Productos', disabled: true, href: '' },
     { text: CategoryService.getCategoryByParam(this.$route.params.category)!.name, disabled: true, href: '' },
   ]

@@ -2,8 +2,8 @@
   <v-col cols="4" class="d-flex justify-center align-center">
     <v-card class="transparent pa-2" flat tile width="300px" max-width="300px" height="500px">
       <v-img class="d-flex align-end" contain :src="product.photo" width="100%" height="350px" style="border: 1px solid #7E8282; border-radius: 4px;">
-        <v-sheet width="50%" class="text-center py-1 font-weight-bold grey--text text--darken-3" color="success">
-          Disponible
+        <v-sheet width="50%" class="text-center py-1 font-weight-bold white--text" :color="product.stock != 0 ? 'success' : 'red'">
+          {{product.stock != 0 ? 'Disponible' : 'Sin stock'}}
         </v-sheet>
       </v-img>
       <v-card-subtitle class="text-h6 py-0 text-truncate">
@@ -18,12 +18,12 @@
         <div class="d-flex justify-space-around px-1 py-2" style="border: 2px solid #7E8282; width: 35%;">
           <v-icon small @click="amount > 0 ? amount-- : ''">fas fa-minus</v-icon>
           <span class="font-weight-bold grey--text text--darken-2">{{amount}}</span>
-          <v-icon small @click="(amount < 99) && (amount < product.stock) ? amount++ : ''" :color="amount == product.stock ? 'red' : ''">fas fa-plus</v-icon>
+          <v-icon small @click="(amount < 99) && (amount < product.stock) ? amount++ : ''" :color="product.stock == amount ? 'grey lighten-3' : ''">fas fa-plus</v-icon>
         </div>
 
     <v-dialog v-model="dialog" width="500" >
       <template v-slot:activator="{ on, attrs }">
-        <v-btn depressed v-bind="attrs" v-on="on" dark width="55%" height="100%" color="grey darken-3">
+        <v-btn :disabled="product.stock == 0" depressed v-bind="attrs" v-on="on" dark width="55%" height="100%" color="grey darken-3">
           <v-icon class="py-1" large dark>mdi-cart-plus</v-icon>
         </v-btn>
       </template>
@@ -40,10 +40,14 @@
         <v-divider/>
 
         <div class="d-flex">
-          <v-img contain :src="product.photo" width="50%" height="350px"/>
+          <v-img contain :src="product.photo" width="50%" height="350px" class="d-flex align-end" style="border: 1px solid #7E8282; border-radius: 4px;">
+            <v-sheet width="50%" class="text-center py-1 font-weight-bold white--text" :color="product.stock != 0 ? 'success' : 'red'">
+              {{product.stock != 0 ? 'Disponible' : 'Sin stock'}}
+            </v-sheet>
+          </v-img>
 
           <div style="width: 50%;" class="py-5 px-3">
-            <span class="py-1">Nombre: {{product.name}}</span>
+            <div class="py-1 text-truncate">Nombre: {{product.name}}</div>
             <v-spacer/>
             <span class="py-1">Codigo: {{product.code}}</span>
             <v-spacer/>
@@ -54,10 +58,10 @@
               <div class="d-flex justify-space-around align-center mx-2 px-1 py-2" style="border: 2px solid #7E8282; width: 35%; height: 35px;">
                 <v-icon dense small @click="amount > 0 ? amount-- : ''">fas fa-minus</v-icon>
                 <span class="font-weight-bold grey--text text--darken-2">{{amount}}</span>
-                <v-icon dense small @click="amount < 99 ? amount++ : ''">fas fa-plus</v-icon>
+                <v-icon dense small @click="(amount < 99) && (amount < product.stock) ? amount++ : ''" :color="product.stock == amount ? 'grey lighten-3' : ''">fas fa-plus</v-icon>
               </div>
             </div>
-            <div class="my-1">Sub-Total: {{product.price * amount}}</div>
+            <div class="my-8 text-h5"> <span class="text-h6">Sub-Total:</span> {{product.price * amount}}</div>
           </div>
         </div>
 
